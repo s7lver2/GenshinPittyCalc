@@ -1,4 +1,4 @@
-DEV | v1.2
+DEV | v1.3
 
 ### INSTALL
 
