@@ -1,16 +1,62 @@
 ---
-
+import { useState } from 'react'; // Elimina si no usas React
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Genshin Tools</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html>
+  <head>
+    <title>Gacha Calculator</title>
+  </head>
+  <body>
+    <h1>Gacha Wishes Calculator</h1>
+    <form id="wishForm">
+      <label for="constelation">Constelation: </label>
+      <input type="number" id="constelation" name="constelation" required /><br />
+
+      <label for="weapon">Weapon: </label>
+      <input type="number" id="weapon" name="weapon" required /><br />
+
+      <label for="guaranteed">Guaranteed: </label>
+      <input type="checkbox" id="guaranteed" name="guaranteed" /><br />
+
+      <button type="submit">Calculate Wishes</button>
+    </form>
+
+	<!-- Campo de texto para mostrar el resultado -->
+    <label for="result">Result: </label>
+    <input type="text" id="result" name="result" readonly /><br />
+
+    <script>
+      document.getElementById('wishForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const form = event.target as HTMLFormElement;
+
+        const constelation = parseInt((form.elements['constelation'] as HTMLInputElement).value, 10);
+        const weapon = parseInt((form.elements['weapon'] as HTMLInputElement).value, 10);
+        const guaranteed = (form.elements['guaranteed'] as HTMLInputElement).checked;
+
+        const data = { constelation, weapon, guaranteed };
+
+        fetch('http://localhost:3001/api/process', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            console.log('Resultado:', result);
+
+            // Mostrar el resultado en la caja de texto
+            const resultInput = document.getElementById('result') as HTMLInputElement;
+            resultInput.value = `Necesary Wishes: ${result.additionalData.processedItems[0].value}`;
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert('Hubo un error al procesar los datos.');
+          });
+      });
+    </script>
+  </body>
 </html>
