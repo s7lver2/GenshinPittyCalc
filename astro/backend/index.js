@@ -8,7 +8,6 @@ const port = 3001; // Puedes elegir el puerto que prefieras
 const pity_value = 90;
 const wish_value = 160;
 
-
 app.use(express.json()); // Middleware para parsear JSON
 app.use(cors()); // Permite solicitudes desde otros orígenes
 
@@ -39,7 +38,6 @@ app.post('/api/process', (req, res) => {
       additionalData: {
         processedItems: [
           { result: "Necesary Wishes", value: neededWishesWithWeapon },
-          { id: 2, value: 'Item 2' }
         ]
       }
     };
