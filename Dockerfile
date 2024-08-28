@@ -38,4 +38,4 @@ COPY astro/backend ./backend
 EXPOSE 3000 3001
 
 # Comando para ejecutar ambos servicios (frontend y backend)
-CMD ["node", "backend/server.js"]
+CMD ["node", "backend/index.js"]
