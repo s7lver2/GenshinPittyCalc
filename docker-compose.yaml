@@ -1,15 +1,20 @@
 version: '3.8'
 
 services:
-  app:
+  frontend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.frontend
     ports:
-      - "3000:3000" # Mapea el puerto 3000 del contenedor al 3000 del host (frontend)
-      - "3001:3001" # Mapea el puerto 3001 del contenedor al 3001 del host (backend)
-    volumes:
-      - ./astro/backend:/app/backend
-      - ./astro/dist:/app/astro/dist
+      - "3000:3000" # Mapea el puerto 3000 del contenedor al 3000 del host
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "3001:3001" # Mapea el puerto 3001 del contenedor al 3001 del host
     environment:
       - NODE_ENV=development

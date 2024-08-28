@@ -1,0 +1,17 @@
+FROM node:18
+
+WORKDIR /app
+
+# Copia el package.json y el package-lock.json del backend
+COPY astro/backend/package*.json ./backend/
+WORKDIR /app/backend
+RUN npm install
+
+# Copia el código fuente del backend
+COPY astro/backend ./backend
+
+# Exponemos el puerto 3001 para el backend
+EXPOSE 3001
+
+# Comando para ejecutar el servidor del backend
+CMD ["npm", "start", "--prefix", "backend"]
