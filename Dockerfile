@@ -38,4 +38,4 @@ COPY astro/backend ./backend
 EXPOSE 3000 3001
 
 # Comando para ejecutar ambos servicios (frontend y backend)
-CMD ls -la /app && ls -la /app/backend && node backend/server.js
+CMD ls -la /app && ls -la /app/backend && node backend/index.js
