@@ -5,7 +5,7 @@ FROM node:18 AS build-astro
 
 WORKDIR /app
 
-# Copia el package.json del frontend y sus dependencias
+# Copia el package.json y el package-lock.json del frontend y sus dependencias
 COPY astro/package*.json ./
 
 # Instala las dependencias del frontend
@@ -38,4 +38,4 @@ COPY astro/backend ./backend
 EXPOSE 3000 3001
 
 # Comando para ejecutar ambos servicios (frontend y backend)
-CMD ls -la /app && ls -la /app/backend && node backend/index.js
+CMD ["node", "backend/server.js"]
