@@ -1,5 +1,3 @@
-# Dockerfile
-
 # Etapa 1: Construir el frontend Astro
 FROM node:18 AS build-astro
 
