@@ -6,7 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000" # Mapea el puerto 3000 del contenedor al 3000 de la máquina host
+      - "3000:3000" # Mapea el puerto 3000 del contenedor al 3000 del host (frontend)
+      - "3001:3001" # Mapea el puerto 3001 del contenedor al 3001 del host (backend)
     volumes:
       - ./astro:/app # Sincroniza el código del proyecto completo para facilitar el desarrollo
     environment:

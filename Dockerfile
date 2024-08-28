@@ -34,8 +34,8 @@ COPY --from=build-astro /app/dist ./astro/dist
 # Copia el código fuente del backend
 COPY astro/backend ./backend
 
-# Expone el puerto 3000 para la API
-EXPOSE 3000
+# Expone los puertos 3000 para el frontend y 3001 para el backend
+EXPOSE 3000 3001
 
-# Comando para ejecutar la API
-CMD ["node", "backend/server.js"]
+# Comando para ejecutar ambos servicios (frontend y backend)
+CMD ls -la /app && ls -la /app/backend && node backend/server.js
