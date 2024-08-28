@@ -1,22 +1,13 @@
 version: '3.8'
 
 services:
-  api:
-    build: ./astro/backend
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "3001:3001"
-    networks:
-      - vnetwork
-
-  web:
-    build: ./astro
-    ports:
-      - "3000:3000"
-    depends_on:
-      - api
-    networks:
-      - vnetwork
-
-networks:
-  vnetwork:
-    driver: bridge
+      - "3000:3000" # Mapea el puerto 3000 del contenedor al 3000 de la máquina host
+    volumes:
+      - ./astro:/app # Sincroniza el código del proyecto completo para facilitar el desarrollo
+    environment:
+      - NODE_ENV=development
