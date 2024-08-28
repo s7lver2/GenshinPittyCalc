@@ -1,5 +1,5 @@
-# Etapa de construcción del frontend
-FROM node:18 AS build-frontend
+# Etapa de desarrollo del frontend
+FROM node:18 AS development
 
 WORKDIR /app
 
@@ -12,17 +12,8 @@ RUN npm install
 # Copia el resto del código fuente del frontend
 COPY astro/ .
 
-# Construye el frontend
-RUN npm run build
-
-# Etapa de producción del frontend
-FROM nginx:alpine
-
-# Copia los archivos construidos al contenedor Nginx
-COPY --from=build-frontend /app/dist /usr/share/nginx/html
-
 # Exponemos el puerto 3000 para el frontend
 EXPOSE 3000
 
-# Comando para iniciar Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Comando para iniciar el servidor de desarrollo de Astro
+CMD ["npm", "run", "dev"]

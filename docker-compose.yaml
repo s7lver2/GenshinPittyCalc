@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
     ports:
-      - "3000:3000" # Mapea el puerto 3000 del contenedor al 3000 del host
+      - "3000:3000"
     depends_on:
       - backend
 
@@ -15,6 +15,6 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     ports:
-      - "3001:3001" # Mapea el puerto 3001 del contenedor al 3001 del host
+      - "3001:3001"
     environment:
       - NODE_ENV=development
