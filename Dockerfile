@@ -22,11 +22,11 @@ WORKDIR /app
 
 # Copia los archivos del backend
 COPY astro/backend/package*.json ./backend/
-
-# Instala las dependencias del backend
-RUN cd ./backend && npm install
+WORKDIR /app/backend
+RUN npm install
 
 # Copia el código construido del frontend desde la etapa de construcción
+WORKDIR /app
 COPY --from=build-astro /app/dist ./astro/dist
 
 # Copia el código fuente del backend
