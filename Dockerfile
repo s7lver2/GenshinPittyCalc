@@ -37,5 +37,5 @@ COPY astro/backend ./backend
 # Expone los puertos 3000 para el frontend y 3001 para el backend
 EXPOSE 3000 3001
 
-# Comando para ejecutar ambos servicios (frontend y backend)
+# Comando para ejecutar el servidor del backend
 CMD ["node", "backend/index.js"]
